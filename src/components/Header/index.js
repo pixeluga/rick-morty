@@ -5,7 +5,9 @@ import logo from '../../logo.png';
 export default function Header () {
     return (
         <header>
-            <img alt = 'logo' height = '100px' src = { logo } />
+            <a href = '/' title = 'To main page'>
+                <img alt = 'logo' height = '100px' src = { logo } />
+            </a>
         </header>
     );
 }

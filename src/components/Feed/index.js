@@ -20,10 +20,20 @@ export default class Feed extends Component {
         info:            {},
         characters:      [],
         isCardsFetching: false,
+        currentPage:     "",
     };
 
     componentDidMount () {
-        this._fetchCardsAsync();
+        if (window.location.search) {
+            this._fetchCardsAsync(
+                `https://rickandmortyapi.com/api/character/${window.location.search}`
+            );
+            this._updateCurrentPage();
+
+        } else {
+            this._fetchCardsAsync();
+        }
+
     }
 
     _setCardsFetchingState = (state) => {
@@ -39,8 +49,6 @@ export default class Feed extends Component {
         const characters = data.results;
         const info = data.info;
 
-        console.log(info);
-
         this.setState({
             info,
             characters,
@@ -48,6 +56,21 @@ export default class Feed extends Component {
         });
 
     };
+
+    _updateCurrentPage = (pageString) => {
+        if (pageString) {
+
+            this.props.history.push(pageString);
+
+            this.setState({
+                currentPage: pageString,
+            });
+        } else {
+            this.setState({
+                currentPage: window.location.search,
+            });
+        }
+    }
 
     _increasePageAsync = () => {
         this._fetchCardsAsync(this.state.info.next);
@@ -58,7 +81,7 @@ export default class Feed extends Component {
     }
 
     render () {
-        const { isCardsFetching, characters, info } = this.state;
+        const { isCardsFetching, characters, info, currentPage } = this.state;
 
         const disPrev = !this.state.info.prev;
         const disNext = !this.state.info.next;
@@ -80,28 +103,19 @@ export default class Feed extends Component {
                 disNext = { disNext }
                 disPrev = { disPrev }
                 increasePage = { this._increasePageAsync }
+                page = { currentPage }
             />
 
             <Pagination
                 click = { this._fetchCardsAsync }
                 info = { info }
+                page = { currentPage }
+                updatePage = { this._updateCurrentPage }
             />
 
             <Container>
                 {charactersJSX}
             </Container>
-
-            <Pagination
-                click = { this._fetchCardsAsync }
-                info = { info }
-            />
-
-            <Buttons
-                decreasePage = { this._decreasePageAsync }
-                disNext = { disNext }
-                disPrev = { disPrev }
-                increasePage = { this._increasePageAsync }
-            />
         </>;
 
         return (

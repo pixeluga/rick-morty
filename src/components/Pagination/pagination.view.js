@@ -24,5 +24,13 @@ export default {
         color: #00afc7;
         font-weight: 700;
         size: .8rem;
+        ${(props) => props.disabled ? `
+        opacity: 0.5;
+        cursor: default;
+        background: #ddd;
+        &:hover{
+          background: #ddd;
+        };
+        `: ""}
   `,
 };

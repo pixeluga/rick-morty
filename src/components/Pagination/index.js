@@ -6,23 +6,22 @@ import PageLine from "./pagination.view.js";
 
 export default class Pagination extends Component {
     render () {
-        const { click, info } = this.props;
-
-        console.log(info);
+        const { page, click, info, updatePage } = this.props;
 
         const maxPage = info.pages;
-
         const pageList = [...new Array(maxPage)].map((val, i) => this.val = i+1);
-
-        // const clickPage = click(`https://rickandmortyapi.com/api/character/?page={}`)
 
         const pagesJSX = pageList.map((num) => {
             return (
                 <PageLine.Li
+                    disabled = { page === `?page=${num}` }
                     key = { num }
                     onClick = {
                         () => {
-                            click(`https://rickandmortyapi.com/api/character/?page=${num}`);
+                            if (page !== `?page=${num}`) {
+                                click(`https://rickandmortyapi.com/api/character/?page=${num}`);
+                                updatePage(`?page=${num}`);
+                            }
                         }
                     }>
                     {num}
