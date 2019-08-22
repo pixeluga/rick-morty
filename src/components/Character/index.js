@@ -8,6 +8,8 @@ export default class Character extends Component {
     render () {
         const character = this.props;
 
+        const type =  character.type ? <li><em>type:</em> {character.type}</li> : "";
+
         return (
             <Card.Wrapper>
                 <Card.Image
@@ -19,7 +21,7 @@ export default class Character extends Component {
                     <li><strong><em>status:</em> {character.status}</strong></li>
                     <li><em>species:</em> {character.species}</li>
                     <li><em>gender:</em> {character.gender}</li>
-                    <li><em>type:</em> {character.type}</li>
+                    {type}
                 </Card.Info>
             </Card.Wrapper>
         );

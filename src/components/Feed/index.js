@@ -6,7 +6,8 @@ import {
     Loader,
     Character,
     Pagination,
-    Buttons
+    Buttons,
+    Sorting
 } from '../../components';
 
 // Styled
@@ -14,13 +15,15 @@ import Container from "./feed.view.js";
 
 // Instruments
 import { api } from '../../REST';
+import { sortByGroup } from '../../instruments';
 
 export default class Feed extends Component {
     state = {
         info:            {},
         characters:      [],
+        sortingType:     '',
         isCardsFetching: false,
-        currentPage:     "",
+        currentPage:     "?page=1",
     };
 
     componentDidMount () {
@@ -57,6 +60,10 @@ export default class Feed extends Component {
 
     };
 
+    _updateSorting = (type) => {
+        this.setState({ sortingType: type });
+    };
+
     _updateCurrentPage = (pageString) => {
         if (pageString) {
 
@@ -81,12 +88,18 @@ export default class Feed extends Component {
     }
 
     render () {
-        const { isCardsFetching, characters, info, currentPage } = this.state;
+        const {
+            isCardsFetching,
+            characters,
+            sortingType,
+            info,
+            currentPage,
+        } = this.state;
 
         const disPrev = !this.state.info.prev;
         const disNext = !this.state.info.next;
 
-        const charactersJSX = characters.map((character) => {
+        const charactersJSX = sortByGroup(sortingType, characters).map((character) => {
             return (
                 <Character
                     key = { character.id }
@@ -112,6 +125,8 @@ export default class Feed extends Component {
                 page = { currentPage }
                 updatePage = { this._updateCurrentPage }
             />
+
+            <Sorting _updateSorting = { this._updateSorting } />
 
             <Container>
                 {charactersJSX}

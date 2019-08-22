@@ -13,7 +13,6 @@ export default {
         margin: 1rem;
         box-shadow: 2px 2px 5px #ccc;
     `,
-
     Title: styled.h3`
         margin-bottom: 10px;
     `,

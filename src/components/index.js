@@ -6,6 +6,7 @@ import Character from './Character';
 import ButtonPage from './ButtonPage';
 import Buttons from './Buttons';
 import Pagination from './Pagination';
+import Sorting from './Sorting';
 
 export {
     Loader,
@@ -15,5 +16,6 @@ export {
     Character,
     ButtonPage,
     Buttons,
-    Pagination
+    Pagination,
+    Sorting
 };
