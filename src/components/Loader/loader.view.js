@@ -8,13 +8,12 @@ export default {
     `,
     Span: styled.span`
         display: inline-block;
-        height: 20rem;
-        font-size: 10rem;
+        font-size: 11vw;
         color: #83cc82;
         padding-top:6px;
         vertical-align: top;
     `,
     Image: styled.img`
-        height = '10rem'
+        height: 15vw;
     `,
 };
