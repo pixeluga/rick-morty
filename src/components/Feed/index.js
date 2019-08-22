@@ -80,10 +80,16 @@ export default class Feed extends Component {
     }
 
     _increasePageAsync = () => {
+        this._updateCurrentPage(
+            this.state.info.next.replace('https://rickandmortyapi.com/api/character/', '')
+        );
         this._fetchCardsAsync(this.state.info.next);
     }
 
     _decreasePageAsync = () => {
+        this._updateCurrentPage(
+            this.state.info.prev.replace('https://rickandmortyapi.com/api/character/', '')
+        );
         this._fetchCardsAsync(this.state.info.prev);
     }
 
