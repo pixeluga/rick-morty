@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Feed from './Feed';
 import Character from './Character';
+import CardPaper from './CardPaper';
 import ButtonPage from './ButtonPage';
 import Buttons from './Buttons';
 import Pagination from './Pagination';
@@ -14,6 +15,7 @@ export {
     Footer,
     Feed,
     Character,
+    CardPaper,
     ButtonPage,
     Buttons,
     Pagination,

@@ -1,0 +1,11 @@
+.cardInStart {
+    transform: scale(.5);
+    opacity: .01;
+}
+
+.cardInEnd {
+    transform: scale(1);
+    transition: opacity 500ms var(--cubic1),
+        transform 500ms var(--cubic1);
+    opacity: 1;
+}
