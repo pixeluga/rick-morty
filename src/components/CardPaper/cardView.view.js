@@ -4,17 +4,20 @@ import styled from "styled-components";
 export default {
     Wrapper: styled.div`
         ${(props) => props.dis ? `
-            position: absolute;
-            top: 0;
+            position: fixed;
+            top: 1.5rem;
             bottom: 0;
             left: 0;
             right: 0;
             margin-left: auto;
             margin-right: auto;
             
-            width: 90%;
-            max-width: 500px;
-            max-height: 750px;
+            width: 500px;
+            height: 750px
+            max-width: 70%;
+            max-height: 90%;
+            overflow: scroll;
+            opacity: 1;
 
             background-color:#eee;
             border: 1px solid #fefefe;
@@ -22,24 +25,23 @@ export default {
             padding: 30px;
             box-shadow: 2px 2px 5px #ccc;
             font-size: 2rem;
-
-            
-
-            transition-duration: 500ms;
-            transition-property: opacity, top;
-            transition-delay: 0;
+           
+            transform: scale(1);
+            transition: top 500ms, opacity 700ms, transform 700ms, left 700ms;
         };
         `: `
-            position: relative;
             top: 0;
             bottom: 0;
-            left: 0;
+            left: 1233.5px;
             right: 0;
             opacity: 0;
             overflow: hidden;
             width: 0;
             height:0;
             padding: 0;
+
+            transform: scale(.001);
+            transition: opacity 1000ms;
         `}
        
     `,
