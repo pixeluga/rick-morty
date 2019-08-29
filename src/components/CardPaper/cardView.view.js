@@ -7,10 +7,10 @@ export default {
             position: fixed;
             top: 1.5rem;
             bottom: 0;
-            left: 0;
+            left: ${props.centerX}px;
             right: 0;
-            margin-left: auto;
-            margin-right: auto;
+            // margin-left: auto;
+            // margin-right: auto;
             
             width: 500px;
             height: 750px
@@ -25,23 +25,25 @@ export default {
             padding: 30px;
             box-shadow: 2px 2px 5px #ccc;
             font-size: 2rem;
-           
+
+            x: 500px;
             transform: scale(1);
-            transition: top 500ms, opacity 700ms, transform 700ms, left 700ms;
+            transition: top 500ms,
+                        opacity 700ms,
+                        transform 700ms,
+                        left 300ms;
         };
         `: `
+            position: relative;
             top: 0;
             bottom: 0;
-            left: 1233.5px;
+            left: ${props.leftPos}px;
             right: 0;
-            opacity: 0;
+            opacity: 1;
             overflow: hidden;
-            width: 0;
-            height:0;
-            padding: 0;
-
-            transform: scale(.001);
-            transition: opacity 1000ms;
+            width: 0px;
+            height: 0px;
+            padding: 0px;
         `}
        
     `,

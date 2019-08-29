@@ -5,18 +5,57 @@ import React, { Component } from 'react';
 import CardView from "./cardView.view.js";
 
 export default class CardPaper extends Component {
+    state = {
+        left:    0,
+        centerX: 0,
+        width:   0,
+        height:  0,
+    }
+
+    // componentWillMount = () => {
+    //     this._updateDimensions();
+    // }
 
     componentDidMount = () => {
+        window.addEventListener('resize', this._updateDimensions());
 
         const rect = this.selector.current.getBoundingClientRect();
+        const positionDiv = {};
+        const center = {};
 
-        // console.log(rect);
+        positionDiv.left = rect.x;
+        center.x = document.documentElement.clientWidth / 2;
+        // center.y = document.documentElement.clientHeight / 2;
+
+        this._savePosition(positionDiv, center);
     };
 
     selector = React.createRef();
 
+    _updateDimensions = () => {
+        const w = window;
+        const d = document;
+        const documentElement = d.documentElement;
+        const body = d.querySelector('body');
+        const width = w.innerWidth || documentElement.clientWidth || body.clientWidth;
+        const height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
+
+        console.log(`${width} x ${height}`);
+
+        this.setState({
+            width,
+            height,
+        });
+    }
+
+    _savePosition = (pos, cent) => {
+        this.setState({
+            left:    pos.left,
+            centerX: cent.x,
+        });
+    }
+
     _click = () => {
-        console.log("dddddd");
         this.props.click();
     }
 
@@ -28,10 +67,11 @@ export default class CardPaper extends Component {
 
     render () {
         const { character, display } = this.props;
+        const { left, centerX } = this.state;
 
         const type =  character.type ? <li><em>type:</em> {character.type}</li> : "";
 
-        // console.log(rect);
+        const center2Div = 2*centerX > 500 ? centerX - 250 : 0.15*centerX;
 
         // if (this.props.className === 'fade') {
         //     this._timer;
@@ -39,11 +79,13 @@ export default class CardPaper extends Component {
 
         return (
             <CardView.Wrapper
+                centerX = { center2Div }
                 className = { this.props.className }
                 dis = { display }
+                leftPos = { left }
                 ref = { this.selector }
                 onClick = { this._click }>
-                <div><CardView.X>x</CardView.X></div>
+                <><CardView.X>x</CardView.X></>
                 <div>
                     <CardView.Image
                         src = { character.image }
