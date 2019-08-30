@@ -5,42 +5,44 @@ export default {
     Wrapper: styled.div`
         ${(props) => props.dis ? `
             position: fixed;
+            
             top: 1.5rem;
             bottom: 0;
             left: ${props.centerX}px;
             right: 0;
-            // margin-left: auto;
-            // margin-right: auto;
+
+            overflow: scroll;
+            opacity: 1;
             
             width: 500px;
             height: 750px
             max-width: 70%;
             max-height: 90%;
-            overflow: scroll;
-            opacity: 1;
+            padding: 30px;
 
             background-color:#eee;
             border: 1px solid #fefefe;
             border-radius: 15px;
-            padding: 30px;
             box-shadow: 2px 2px 5px #ccc;
             font-size: 2rem;
 
-            x: 500px;
-            transform: scale(1);
-            transition: top 500ms,
-                        opacity 700ms,
-                        transform 700ms,
-                        left 300ms;
+            transition: opacity 300ms,
+                        height 600ms,
+                        width  600ms,
+                        top    600ms,
+                        left   600ms;
         };
         `: `
             position: relative;
-            top: 0;
+
+            top: ${props.topPos}px;
             bottom: 0;
             left: ${props.leftPos}px;
             right: 0;
-            opacity: 1;
+
+            opacity: 0;
             overflow: hidden;
+
             width: 0px;
             height: 0px;
             padding: 0px;
@@ -59,17 +61,4 @@ export default {
         height: 100%;
         border-radius: 10px;
     `,
-    X: styled.span`
-        display: flex;
-        justify-content: space-around;
-        font-size: .5em;
-        width: 1.1em;
-        height: 1.1em;
-        padding:.2em .3em .4em .3em;        
-        margin-left:90%;
-        margin-bottom: .5em;
-        color:#555;
-        border-radius: 50%;
-        border: 1px solid #555;
-`,
 };

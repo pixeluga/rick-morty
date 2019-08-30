@@ -1,6 +1,5 @@
 // Core
 import React, { Component } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import FlipMove from 'react-flip-move';
 
 // Components
@@ -18,7 +17,6 @@ import Container from "./feed.view.js";
 // Instruments
 import { api } from '../../REST';
 import { sortByGroup } from '../../instruments';
-import Styles from './styles.css';
 
 export default class Feed extends Component {
     state = {
@@ -39,7 +37,6 @@ export default class Feed extends Component {
         } else {
             this._fetchCardsAsync();
         }
-
     }
 
     _setCardsFetchingState = (state) => {
@@ -110,21 +107,10 @@ export default class Feed extends Component {
 
         const charactersJSX = sortByGroup(sortingType, characters).map((character) => {
             return (
-                <CSSTransition
-                    classNames = { {
-                        enter:       Styles.cardInStart,
-                        enterActive: Styles.cardInEnd,
-                    } }
+                <Character
                     key = { character.id }
-                    timeout = { {
-                        enter: 5000,
-                        exit:  4000,
-                    } }>
-                    <Character
-                        // key = { character.id }
-                        { ...character }
-                    />
-                </CSSTransition>
+                    { ...character }
+                />
             );
         });
 
@@ -158,9 +144,7 @@ export default class Feed extends Component {
 
         return (
             <>
-                <TransitionGroup>
-                    {toRender}
-                </TransitionGroup>
+                {toRender}
             </>
         );
     }

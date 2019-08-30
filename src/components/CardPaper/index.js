@@ -6,29 +6,24 @@ import CardView from "./cardView.view.js";
 
 export default class CardPaper extends Component {
     state = {
+        top:     0,
         left:    0,
         centerX: 0,
         width:   0,
         height:  0,
+
+        windowHeight: 0,
+        windowWidth:  0,
     }
 
-    // componentWillMount = () => {
-    //     this._updateDimensions();
-    // }
-
     componentDidMount = () => {
-        window.addEventListener('resize', this._updateDimensions());
+        this._updateDimensions();
 
-        const rect = this.selector.current.getBoundingClientRect();
-        const positionDiv = {};
-        const center = {};
+        window.addEventListener('resize', this._updateDimensions);
+        window.addEventListener('scroll', this._updateDimensions);
 
-        positionDiv.left = rect.x;
-        center.x = document.documentElement.clientWidth / 2;
-        // center.y = document.documentElement.clientHeight / 2;
-
-        this._savePosition(positionDiv, center);
-    };
+        this._savePosition();
+    }
 
     selector = React.createRef();
 
@@ -37,21 +32,22 @@ export default class CardPaper extends Component {
         const d = document;
         const documentElement = d.documentElement;
         const body = d.querySelector('body');
-        const width = w.innerWidth || documentElement.clientWidth || body.clientWidth;
-        const height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
 
-        console.log(`${width} x ${height}`);
+        const windowHeight = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
+        const windowWidth = w.innerWidth || documentElement.clientWidth || body.clientWidth;
 
         this.setState({
-            width,
-            height,
+            windowHeight,
+            windowWidth,
         });
-    }
+    };
 
-    _savePosition = (pos, cent) => {
+    _savePosition = () => {
+        const rect = this.selector.current.getBoundingClientRect();
+
         this.setState({
-            left:    pos.left,
-            centerX: cent.x,
+            left: rect.left,
+            top:  rect.top,
         });
     }
 
@@ -67,11 +63,14 @@ export default class CardPaper extends Component {
 
     render () {
         const { character, display } = this.props;
-        const { left, centerX } = this.state;
+        const { left, top, windowWidth } = this.state;
+
+        // If the window was scrolled by Y - window.scrollY
+        const topScroll = top - window.scrollY;
 
         const type =  character.type ? <li><em>type:</em> {character.type}</li> : "";
 
-        const center2Div = 2*centerX > 500 ? centerX - 250 : 0.15*centerX;
+        const center2Div = windowWidth > 500 ? windowWidth/2 - 250 : 0.075*windowWidth;
 
         // if (this.props.className === 'fade') {
         //     this._timer;
@@ -84,8 +83,8 @@ export default class CardPaper extends Component {
                 dis = { display }
                 leftPos = { left }
                 ref = { this.selector }
+                topPos = { topScroll }
                 onClick = { this._click }>
-                <><CardView.X>x</CardView.X></>
                 <div>
                     <CardView.Image
                         src = { character.image }
