@@ -27,10 +27,10 @@ export default {
             font-size: 2rem;
 
             transition: opacity 300ms,
-                        height 600ms,
-                        width  600ms,
-                        top    600ms,
-                        left   600ms;
+                        height  200ms,
+                        width   200ms,
+                        top     300ms,
+                        left    300ms;
         };
         `: `
             position: relative;

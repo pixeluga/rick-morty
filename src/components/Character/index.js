@@ -23,7 +23,8 @@ export default class Character extends Component {
         const type =  character.type ? <li><em>type:</em> {character.type}</li> : "";
 
         return (
-            <button
+            <div
+                className = 'button'
                 onClick = { this._showCard }>
                 <CardPaper
                     character = { character }
@@ -44,7 +45,7 @@ export default class Character extends Component {
                         {type}
                     </Card.Info>
                 </Card.Wrapper>
-            </button>
+            </div>
         );
     }
 }

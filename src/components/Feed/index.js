@@ -125,20 +125,26 @@ export default class Feed extends Component {
                 page = { currentPage }
             />
 
-            <Pagination
-                click = { this._fetchCardsAsync }
-                info = { info }
-                page = { currentPage }
-                updatePage = { this._updateCurrentPage }
-            />
+            <div>
+                <Pagination
+                    click = { this._fetchCardsAsync }
+                    info = { info }
+                    page = { currentPage }
+                    updatePage = { this._updateCurrentPage }
+                />
+            </div>
 
-            <Sorting _updateSorting = { this._updateSorting } />
+            <div>
+                <Sorting _updateSorting = { this._updateSorting } />
+            </div>
 
-            <Container>
-                <FlipMove duration = { 500 } typeName = { null } >
-                    {charactersJSX}
-                </FlipMove>
-            </Container>
+            <div>
+                <Container>
+                    <FlipMove duration = { 500 } typeName = { null } >
+                        {charactersJSX}
+                    </FlipMove>
+                </Container>
+            </div>
 
         </>;
 
